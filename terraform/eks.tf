@@ -114,10 +114,7 @@ module "eks" {
       ami_type       = "AL2023_x86_64_STANDARD"
       min_size       = 1
       max_size       = 3
-      desired_size   = 3
-    }
-    labels = {
-      role = "general"
+      desired_size   = 2
     }
   }
 
