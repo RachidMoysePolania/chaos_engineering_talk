@@ -79,8 +79,6 @@ curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-cont
 aws iam create-policy \
     --policy-name AWSLoadBalancerControllerIAMPolicy \
     --policy-document file://iam_policy.json
-
-# Note the Policy ARN from output
 ```
 
 ### 2.2 Create Service Account with IAM Role

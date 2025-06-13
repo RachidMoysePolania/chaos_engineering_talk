@@ -9,7 +9,7 @@ module "eks" {
   cluster_name                             = "${local.name}-al2023"
   cluster_version                          = "1.33"
   cluster_endpoint_public_access           = true
-  cluster_endpoint_public_access_cidrs     = ["190.84.117.111/32"]
+  cluster_endpoint_public_access_cidrs     = ["0.0.0.0/0"]
   enable_cluster_creator_admin_permissions = true
   kms_key_description                      = "key for eks secret encryption"
 

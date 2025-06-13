@@ -20,7 +20,8 @@ eksctl create iamserviceaccount \
   --role-name AmazonEKSLoadBalancerControllerRole \
   --attach-policy-arn=arn:aws:iam::$(aws sts get-caller-identity --query Account --output text):policy/AWSLoadBalancerControllerIAMPolicy \
   --approve \
-  --region=$REGION
+  --region=$REGION \
+  --override-existing-serviceaccounts
 
 # Install ALB Controller
 helm repo add eks https://aws.github.io/eks-charts
@@ -51,19 +52,19 @@ kubectl get svc istio-ingressgateway -n istio-system -w
 >> In the meantime, you can update your route53 to add an alias to bookinfo.yourdomain.com to the nlb
 
 # Deploy Bookinfo Application
-kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
+kubectl apply -f bookinfo/platform/kube/bookinfo.yaml
 kubectl get pods -w
 kubectl get svc
 
 # Apply Gateway an VirtualService
 kubectl apply -f bookinfo-gw.yaml
-kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+kubectl apply -f bookinfo/networking/bookinfo-gateway.yaml
 
 # Install Addons
-kubectl apply -f samples/addons/prometheus.yaml
-kubectl apply -f samples/addons/grafana.yaml
-kubectl apply -f samples/addons/jaeger.yaml
-kubectl apply -f samples/addons/kiali.yaml
+kubectl apply -f addons/prometheus.yaml
+kubectl apply -f addons/grafana.yaml
+kubectl apply -f addons/jaeger.yaml
+kubectl apply -f addons/kiali.yaml
 
 # Set CloudWatch Monitoring
 kubectl create namespace amazon-cloudwatch

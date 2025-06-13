@@ -1,0 +1,35 @@
+# kiali-virtualservice.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: kiali-vs
+  namespace: istio-system
+spec:
+  hosts:
+    - "kiali.rachidmoyse.com"
+  gateways:
+    - observability-gateway
+  http:
+    - route:
+        - destination:
+            host: kiali
+            port:
+              number: 20001
+---
+# grafana-virtualservice.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: grafana-vs
+  namespace: istio-system
+spec:
+  hosts:
+    - "grafana.rachidmoyse.com"
+  gateways:
+    - observability-gateway
+  http:
+    - route:
+        - destination:
+            host: grafana
+            port:
+              number: 3000
